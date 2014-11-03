@@ -68,11 +68,10 @@ E(h) & =M(f) - N(f,h)\\
 as required.
 
 \section{Question 2:}
-We'll generate N/2 equal sub-intervals of [a,b], for some even N $\in \mathbb{N}$\\
-Let M = N/2\\
-Label the sub-intervals as $I_{i}$ with end-points $[x_{2i-2}, x_{2i}]$, for i = 1,...,M\\
-The intervals are of equal length $x_{2i} - x_{2i-2} = 2h = \frac{(b - a)}{M}$\\
-Where there are N + 1 quadrature points $x_{i} = a + ih,$ i = 0,...,N
+We'll generate N equal sub-intervals of [a,b], for some N $\in \mathbb{N}$\\
+Label the sub-intervals as $I_{i}$ with end-points $[x_{2i-2}, x_{2i}]$, for i = 1,...,N\\
+The intervals are of equal length $x_{2i} - x_{2i-2} = 2h = \frac{(b - a)}{N}$\\
+Where there are 2N + 1 quadrature points $x_{i} = a + ih,$ i = 0,...,2N
 \\
 Then the simpson rule on $I_{i}$ is:
 \begin{equation}
@@ -87,15 +86,58 @@ and the sum of integrals over the sub-intervals is:
 
 \begin{equation}
 \begin{split}
-\int_a^b \! f(x) \,\mathrm{d}x. & \approx  \sum_{i=1}^{M} \int_{I_i} \! f(x) \,\\
-& = \sum_{i=1}^{M} \frac{h}{3}(f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
-& = \frac{h}{3} \sum_{i=1}^{M} (f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
-& = \frac{h}{3} (f(x_0) + f(x_N) +  2\sum_{i=1}^{M} f(x_{2i}) + 4\sum_{i=2}^{M} f(x_{2i}))
+\int_a^b \! f(x) \,\mathrm{d}x. & \approx  \sum_{i=1}^{N} \int_{I_i} \! f(x) \,\\
+& = \sum_{i=1}^{N} \frac{h}{3}(f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
+& = \frac{h}{3} \sum_{i=1}^{N} (f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
+& = \frac{h}{3} (f(x_0) + f(x_{2N}) +  2\sum_{i=1}^{N} f(x_{2i}) + 4\sum_{i=2}^{N} f(x_{2i}))
 \end{split}
 \end{equation}    
+\\
+Question 3:\\
+As $f^{iv}$ is constant: $f^{(iv)}(c) = \alpha$ for $ \forall c \in [a,b]$ 
+where $\alpha$ is a constant\\
+Then:
+\begin{equation}
+E(f;a,b) = -\frac{(b - a)^5}{2880}\alpha
+\end{equation}
 
+\begin{equation}
+E_c(f;a,b,2) = -\frac{(b - a)^5}{2880 * 2^4}\alpha
+\end{equation}
 
-
-Question 3:
+\begin{equation}
+\implies E(f;a,b) = 16E_c(f;a,b,2)
+\end{equation}
+\\
+Let $M(f) = \int_a^b \! f(x) \, \mathrm{d}x$ \\
+From definition of errors
+\begin{equation}
+\begin{split}
+&M(f) = S_c(f;a,b,2) + E_c(f;a,b,2)\\
+&M(f) = S(f;a,b) + E(f;a,b)
+\end{split}
+\end{equation}
+\\
+Then:
+\begin{equation}
+\begin{split}
+S_c(f;a,b,2) - S(f;a,b) & = M(f) - E_c(f;a,b,2) - M(f) + E(f;a,b)\\
+& = E(f;a,b) - E_c(f;a,b,2)\\
+& = 16E_c(f;a,b,2) - E_c(f;a,b,2)\\
+& = 15E_c(f;a,b,2)\\
+\end{split}
+\end{equation}
+\begin{equation}
+\iff \frac{1}{15}(S_c(f;a,b,2) - S(f;a,b)) = E_c(f;a,b,2)
+\end{equation}
+\\ as required.\\\\
+Let $E(f;a,b,2) = E_c(f;a,b,2)$ and by $M(f) = S_c(f;a,b,2) + E_c(f;a,b,2)$ 
+it follows that:\\
+\begin{equation}
+\int_a^b \! f(x) \, \mathrm{d}x  = S_c(f;a,b,2) + E(f;a,b,2)
+\end{equation}
 
 \end{document} 
+
+
+

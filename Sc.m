@@ -1,7 +1,13 @@
 function out = Sc(f, a, b, N)
 % Sc(f, a, b, N)
 % This function calculates the integral of f on the interval [a,b]
-% using the Composite Simpson rule with N subintervals
+% using the Composite Simpson rule with N subintervals, the supplied N
+% value should be even
+
+    %Check N is even, otherwise composite Simpson's rule won't work
+    if mod(N, 2) ~= 0
+        error('Supplied number of subintervals N should be even')
+    end
 
     % Partition [a,b] into N subintervals
     points = linspace(a, b, N + 1) ;
