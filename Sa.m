@@ -6,11 +6,10 @@ function out = Sa(f, a, b, eps)
     % Calculate mid-point c
     c = (a + b)/2;
 
-    % Obtain first integral approximation using simple simpson's rule
-    h1 = (c - a);
-    Q1  = (h1/3) * (f(a) + (4 * f(c)) + f(b));
+    % Obtain first integral approximation using 3 nodes
+    Q1  = Sc(f, a, b, 1);
 
-    % Obtain second integral approximation using 2n + 1 nodes
+    % Obtain second integral approximation using 5 nodes
     Q2 =  Sc(f, a, b, 2);
 
     % Estimate the error

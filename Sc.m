@@ -4,20 +4,17 @@ function out = Sc(f, a, b, N)
 % using the Composite Simpson rule with N subintervals, the supplied N
 % value should be even
 
-    %Check N is even, otherwise composite Simpson's rule won't work
-    if mod(N, 2) ~= 0
-        error('Supplied number of subintervals N should be even')
-    end
-
-    % Partition [a,b] into N subintervals
-    points = linspace(a, b, N + 1) ;
+    % Shorthand for double the ino of subintervals
+    N2 = 2 * N;
+    % Generate 2N + 1 equally spaced nodes
+    points = linspace(a, b,  N2 + 1) ;
     
-    % Evalulate f at the end points of the N subintervals
+    % Evalulate f at each node
     fx = f(points);
 
-    % Define the length of a subinterval
-    h = ((b - a) / N); 
+    % Define the distance between each node
+    h = ((b - a) / N2); 
     
     % Apply the composite simpson rule
-    out = (h/3.0) * (fx(1) + (4 * sum(fx(2:2:N))) + (2 * sum(fx(3:2:N))) + fx(N+1));
+    out = (h/3.0) * (fx(1) + (4 * sum(fx(2:2:N2))) + (2 * sum(fx(3:2:N2))) + fx(N2+1));
 end

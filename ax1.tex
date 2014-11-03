@@ -89,11 +89,25 @@ and the sum of integrals over the sub-intervals is:
 \int_a^b \! f(x) \,\mathrm{d}x. & \approx  \sum_{i=1}^{N} \int_{I_i} \! f(x) \,\\
 & = \sum_{i=1}^{N} \frac{h}{3}(f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
 & = \frac{h}{3} \sum_{i=1}^{N} (f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))\\
-& = \frac{h}{3} (f(x_0) + f(x_{2N}) +  2\sum_{i=1}^{N} f(x_{2i}) + 4\sum_{i=2}^{N} f(x_{2i}))
+& = \frac{h}{3} (f(x_0) + f(x_{2N}) +  2\sum_{i=1}^{N-1} f(x_{2i}) + 4\sum_{i=1}^{N} f(x_{2i-1}))
 \end{split}
 \end{equation}    
 \\
 Question 3:\\
+
+Note that:
+\begin{equation}
+\begin{split}
+Sc(f;a,b,1) &= \frac{h}{3} (f(x_0) + f(x_{2}) +  2\sum_{i=1}^{0} f(x_{2i}) + 4\sum_{i=1}^{1} f(x_{2i-1}))\\
+            & = \frac{h}{3} (f(x_0) + 4f(x_1) + f(x_2))\\
+            & = \frac{h}{3} (f(a) + 4f(\frac{a + b}{2}) + f(b))\\
+            & = S(f;a,b)\\
+\end{split}
+\end{equation}
+\begin{equation}
+\implies Ec(f;a,b,1) = E(f;a,b)
+\end{equation}
+\\
 As $f^{iv}$ is constant: $f^{(iv)}(c) = \alpha$ for $ \forall c \in [a,b]$ 
 where $\alpha$ is a constant\\
 Then:
@@ -110,25 +124,26 @@ E_c(f;a,b,2) = -\frac{(b - a)^5}{2880 * 2^4}\alpha
 \end{equation}
 \\
 Let $M(f) = \int_a^b \! f(x) \, \mathrm{d}x$ \\
-From definition of errors
+From definition of Numerical Schemes
 \begin{equation}
 \begin{split}
 &M(f) = S_c(f;a,b,2) + E_c(f;a,b,2)\\
-&M(f) = S(f;a,b) + E(f;a,b)
+&M(f) = S_c(f;a,b,1) + E_c(f;a,b,1)
 \end{split}
 \end{equation}
 \\
 Then:
 \begin{equation}
 \begin{split}
-S_c(f;a,b,2) - S(f;a,b) & = M(f) - E_c(f;a,b,2) - M(f) + E(f;a,b)\\
+S_c(f;a,b,2) - S_c(f;a,b,1) & = M(f) - E_c(f;a,b,2) - M(f) + E_c(f;a,b,1)\\
+& = E_c(f;a,b,1) - E_c(f;a,b,2)\\
 & = E(f;a,b) - E_c(f;a,b,2)\\
 & = 16E_c(f;a,b,2) - E_c(f;a,b,2)\\
 & = 15E_c(f;a,b,2)\\
 \end{split}
 \end{equation}
 \begin{equation}
-\iff \frac{1}{15}(S_c(f;a,b,2) - S(f;a,b)) = E_c(f;a,b,2)
+\iff \frac{1}{15}(S_c(f;a,b,2) - S_c(f;a,b,1)) = E_c(f;a,b,2)
 \end{equation}
 \\ as required.\\\\
 Let $E(f;a,b,2) = E_c(f;a,b,2)$ and by $M(f) = S_c(f;a,b,2) + E_c(f;a,b,2)$ 
