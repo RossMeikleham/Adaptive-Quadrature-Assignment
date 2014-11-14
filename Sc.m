@@ -16,5 +16,8 @@ function out = Sc(f, a, b, N)
     h = ((b - a) / N2); 
     
     % Apply the composite simpson rule
-    out = (h/3.0) * (fx(1) + (4 * sum(fx(2:2:N2))) + (2 * sum(fx(3:2:N2))) + fx(N2+1));
+    odd_terms  =  sum(fx(2:2:N2));
+    even_terms =  sum(fx(3:2:N2));
+    out = (h/3.0) * (fx(1) + (2 * even_terms) + (4 * odd_terms) + fx(N2+1));
+                    
 end
