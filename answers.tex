@@ -112,7 +112,39 @@ Deriving the error in the Composite Simpson's rule $S_c(f;a,b,N)$
 \begin{equation*}
 E_c(f;a,b,N) = -\frac{(b-a)^5}{2880N^4}f^{iv}(c),\ for \ some \ c \in [a,b]
 \end{equation*}
-TODO
+
+\noindent It is not possible to derive the Composite Simpsons' error with only
+the information on the error for the normal Simpsons' rule. The Composite
+Simpson's rule performs the Simpson's rule on multiple sub-intervals meaning the
+error would be the sum of the errors of the ordinary Simpsons' rule on each sub-inverval. 
+But since $f^{iv}(c)$ must be a different value of c for each interval;
+there is not enough information to combine these error intervals to derive the composite error.\\
+
+\noindent For the jth node, $x_j = a + jh, \ j \in [0, 2N]$, \\
+Expanding $f(x_j)$ using the Taylor Expansion gives the following:
+\begin{equation}
+f(x_j) = f(a + jh) = f(a) + jhf'(a) + \frac{(jh)^2}{2!}f''(a) + \frac{(jh)^3}{3!}f'''(a) + \frac{(jh)^4}{4!}f^{(iv)}(a) + O(h^5)
+\end{equation}
+
+\noindent Let x = a + uh, then $f(x)$ gives the following Taylor Expansion:
+\begin{equation}
+f(x) = f(a + uh) = f(a) + uhf'(a) + \frac{(uh)^2}{2!}f''(a) + \frac{(uh)^3}{3!}f'''(a) + \frac{(uh)^4}{4!}f^{(iv)}(a) + O(h^5)
+\end{equation}
+Since we have 2N + 1 points, $u \in [0, 2N]$ integrating $f(x)$ gives the following:
+\begin{equation}
+\begin{split}
+M(f) &= \int_0^{2N} \! hf(a + uh) \, \mathrm{d}u.\\ 
+&= h [uf(a) + \frac{u^2h}{2}f'(a) + \frac{u^3h^2}{6}f''(a) + \frac{u^4h^3}{24}f'''(a) + \frac{u^5h^4}{120}f^{(iv)}(a) + O(h^5)]_0^{2N}\\
+&= 2Nhf(a) + 2(Nh)^2f'(a) + \frac{4(Nh)^3}{3}f''(a) + \frac{2(Nh)^4}{3}f'''(a) + \frac{4(Nh)^5}{15}f^{iv}+ O(h^6)
+\end{split}
+\end{equation}
+
+\noindent To solve for $E_c(f;a,b,N)$ we note that 
+\begin{equation*}
+S_c(f;a,b,N) = \frac{h}{3} (f(x_0) + f(x_{2N}) +  2\sum_{i=1}^{N-1} f(x_{2i}) + 4\sum_{i=1}^{N} f(x_{2i-1}))
+\end{equation*}
+substitute each term into the $f(xj)$ expansion (4), and then subtract the whole sum from
+M(f). This should result in the error value.
 
 \pagebreak
 
