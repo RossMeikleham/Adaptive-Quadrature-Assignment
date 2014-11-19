@@ -1,3 +1,4 @@
+% ID:1107023
 function q7()
 % Matlab File for Question 7 to generate both graphs
 % For Adaptive Simpson`s and Composite Simpsons`
